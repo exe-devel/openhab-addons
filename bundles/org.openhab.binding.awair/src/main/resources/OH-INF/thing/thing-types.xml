@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="awair"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Sample Thing Type -->
+	<thing-type id="element">
+
+		<label>Awair Element</label>
+		<description>An Awair Element Air Quality Sensor</description>
+
+		<channels>
+			<channel id="temperature" typeId="system.indoor-temperature"/>
+			<channel id="humidity" typeId="system.atmospheric-humidity"/>
+			<channel id="co2" typeId="co2-value"/>
+			<channel id="tvoc" typeId="tvoc-value"/>
+			<channel id="pm25" typeId="pm25-value"/>
+			<channel id="dew_point" typeId="dew-point-value"/>
+			<channel id="score" typeId="score-value"/>
+			<channel id="timestamp" typeId="timestamp-value"/>
+		</channels>
+
+		<config-description>
+			<parameter name="hostname" type="text" required="true">
+				<context>network-address</context>
+				<label>Hostname</label>
+				<description>Hostname or IP address of the device</description>
+				<default>192.168.30.25</default>
+			</parameter>
+			<parameter name="refreshInterval" type="integer" unit="s" min="1">
+				<label>Refresh Interval</label>
+				<description>Interval the device is polled in sec.</description>
+				<default>30</default>
+				<advanced>true</advanced>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+	<!-- Sample Channel Type -->
+	<channel-type id="awair-data">
+		<item-type>String</item-type>
+		<label>JSON Data</label>
+		<description>The JSON data</description>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="co2-value">
+		<item-type>Number:Dimensionless</item-type>
+		<label>CO2</label>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="pm25-value">
+		<item-type>Number:Dimensionless</item-type>
+		<label>PM25</label>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="tvoc-value">
+		<item-type>Number:Dimensionless</item-type>
+		<label>TVOC</label>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="dew-point-value">
+		<item-type>Number:Dimensionless</item-type>
+		<label>Dew Point</label>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="score-value">
+		<item-type>Number:Dimensionless</item-type>
+		<label>AWAIR Score</label>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="timestamp-value">
+		<item-type>DateTime</item-type>
+		<label>Last Update</label>
+		<state readOnly="true"/>
+	</channel-type>
+</thing:thing-descriptions>
