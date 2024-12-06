@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2023 Contributors to the openHAB project
+ * Copyright (c) 2010-2024 Contributors to the openHAB project
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information.
@@ -75,7 +75,9 @@ public class ShellyBindingConstants {
             THING_TYPE_SHELLYPLUS2PM_ROLLER, //
             THING_TYPE_SHELLYPLUSI4, //
             THING_TYPE_SHELLYPLUSI4DC, //
+            THING_TYPE_SHELLYPLUSDIMMER10V, //
             THING_TYPE_SHELLYPLUSHT, //
+            THING_TYPE_SHELLYPLUSHTG3, //
             THING_TYPE_SHELLYPLUSSMOKE, //
             THING_TYPE_SHELLYPLUSPLUGS, //
             THING_TYPE_SHELLYPLUSPLUGUS, //
@@ -85,9 +87,9 @@ public class ShellyBindingConstants {
             THING_TYPE_SHELLYPLUSWALLDISPLAY, //
 
             // Shelly Plus Mini
-            THING_TYPE_SHELLYMINI1, //
-            THING_TYPE_SHELLYMINIPM, //
-            THING_TYPE_SHELLYMINI1PM, //
+            THING_TYPE_SHELLY1MINI, //
+            THING_TYPE_SHELLYPMMINI, //
+            THING_TYPE_SHELLY1PMMINI, //
 
             // Shelly Pro
             THING_TYPE_SHELLYPRO1, //
@@ -103,6 +105,9 @@ public class ShellyBindingConstants {
             // Shelly BLU
             THING_TYPE_SHELLYBLUBUTTON, //
             THING_TYPE_SHELLYBLUDW, //
+            THING_TYPE_SHELLYBLUMOTION, //
+            THING_TYPE_SHELLYBLUHT, //
+            THING_TYPE_SHELLYBLUGW, //
 
             THING_TYPE_SHELLYPROTECTED, //
             THING_TYPE_SHELLYUNKNOWN);
@@ -119,6 +124,7 @@ public class ShellyBindingConstants {
     public static final String PROPERTY_DEV_TYPE = "deviceType";
     public static final String PROPERTY_DEV_MODE = "deviceMode";
     public static final String PROPERTY_DEV_GEN = "deviceGeneration";
+    public static final String PROPERTY_DEV_AUTH = "deviceAuth";
     public static final String PROPERTY_GW_DEVICE = "gatewayDevice";
     public static final String PROPERTY_HWREV = "deviceHwRev";
     public static final String PROPERTY_HWBATCH = "deviceHwBatch";
@@ -174,6 +180,11 @@ public class ShellyBindingConstants {
     public static final String CHANNEL_EMETER_CURRENT = "current";
     public static final String CHANNEL_EMETER_PFACTOR = "powerFactor";
     public static final String CHANNEL_EMETER_RESETTOTAL = "resetTotals";
+    public static final String CHANNEL_GROUP_NMETER = "nmeter";
+    public static final String CHANNEL_NMETER_CURRENT = "ncurrent";
+    public static final String CHANNEL_NMETER_IXSUM = "ixsum";
+    public static final String CHANNEL_NMETER_MISMATCH = "nmismatch";
+    public static final String CHANNEL_NMETER_MTRESHHOLD = "nmTreshhold";
 
     public static final String CHANNEL_GROUP_SENSOR = "sensors";
     public static final String CHANNEL_SENSOR_TEMP = "temperature";
@@ -291,7 +302,7 @@ public class ShellyBindingConstants {
     public static final String SHELLY_API_MIN_FWCOIOT = "v1.6";// v1.6.0+
     public static final String SHELLY_API_FWCOIOT2 = "v1.8";// CoAP 2 with FW 1.8+
     public static final String SHELLY_API_FW_110 = "v1.10"; // FW 1.10 or newer detected, activates some add feature
-    public static final String SHELLY2_API_MIN_FWVERSION = "v0.10.2"; // Gen 2 minimum FW
+    public static final String SHELLY2_API_MIN_FWVERSION = "v0.10.1"; // Gen 2 minimum FW
 
     // Alarm types/messages
     public static final String ALARM_TYPE_NONE = "NONE";
@@ -327,13 +338,13 @@ public class ShellyBindingConstants {
     public static final int DIGITS_LUX = 0;
     public static final int DIGITS_PERCENT = 1;
 
-    public static final int SHELLY_API_TIMEOUT_MS = 15000;
+    public static final int SHELLY_API_TIMEOUT_MS = 10000;
     public static final int UPDATE_STATUS_INTERVAL_SECONDS = 3; // check for updates every x sec
     public static final int UPDATE_SKIP_COUNT = 20; // update every x triggers or when a key was pressed
     public static final int UPDATE_MIN_DELAY = 15;// update every x triggers or when a key was pressed
     public static final int UPDATE_SETTINGS_INTERVAL_SECONDS = 60; // check for updates every x sec
     public static final int HEALTH_CHECK_INTERVAL_SEC = 300; // Health check interval, 5min
-    public static final int VIBRATION_FILTER_SEC = 5; // Absore duplicate vibration events for xx sec
+    public static final int VIBRATION_FILTER_SEC = 5; // Absorb duplicate vibration events for xx sec
 
     public static final String BUNDLE_RESOURCE_SNIPLETS = "sniplets"; // where to find code sniplets in the bundle
     public static final String BUNDLE_RESOURCE_SCRIPTS = "scripts"; // where to find scrips in the bundle
