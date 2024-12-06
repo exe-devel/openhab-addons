@@ -65,6 +65,9 @@ public class AirQualityReading {
     }
 
     public Integer getTvoc() {
+        if (voc < 0) {
+            voc *= -1;
+        }
         return voc;
     }
 
