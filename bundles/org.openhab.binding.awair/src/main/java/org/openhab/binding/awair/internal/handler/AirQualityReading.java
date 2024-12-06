@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2023 Contributors to the openHAB project
+ * Copyright (c) 2010-2024 Contributors to the openHAB project
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information.
@@ -20,7 +20,7 @@ import java.time.ZonedDateTime;
  * The {@link AirQualityReading} is responsible for handling commands, which are
  * sent to one of the channels.
  *
- * @author Hans Heinz - Initial contribution
+ * @author Andreas Will - Initial contribution
  */
 public class AirQualityReading {
     private String timestamp;
