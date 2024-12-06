@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Patrik Wimnell - Initial contribution
  * @author Jeff Lauterbach - Start discovery service from bridge
+ * @author Pavion - Vendor added
  */
 public class NeatoAccountDiscoveryService extends AbstractDiscoveryService {
 
@@ -43,7 +44,7 @@ public class NeatoAccountDiscoveryService extends AbstractDiscoveryService {
     private static final int TIMEOUT = 15;
 
     private final NeatoAccountHandler handler;
-    private final ThingUID bridgeUID;
+    private ThingUID bridgeUID;
 
     private ScheduledFuture<?> scanTask;
 
@@ -91,12 +92,18 @@ public class NeatoAccountDiscoveryService extends AbstractDiscoveryService {
 
         logger.debug("addThing(): Adding new Neato unit ({}) to the inbox", robot.getName());
 
+        if (bridgeUID == null) {
+            bridgeUID = handler.getThing().getUID();
+            logger.debug("bridgeUID==null, trying '{}' instead", bridgeUID.toString());
+        }
+
         Map<String, Object> properties = new HashMap<>();
         ThingUID thingUID = new ThingUID(NeatoBindingConstants.THING_TYPE_VACUUMCLEANER, bridgeUID, robot.getSerial());
         properties.put(NeatoBindingConstants.CONFIG_SECRET, robot.getSecretKey());
         properties.put(NeatoBindingConstants.CONFIG_SERIAL, robot.getSerial());
         properties.put(Thing.PROPERTY_MODEL_ID, robot.getModel());
         properties.put(NeatoBindingConstants.PROPERTY_NAME, robot.getName());
+        properties.put(NeatoBindingConstants.CONFIG_VENDOR, handler.getVendor());
 
         thingDiscovered(DiscoveryResultBuilder.create(thingUID).withLabel(robot.getName()).withBridge(bridgeUID)
                 .withProperties(properties).build());

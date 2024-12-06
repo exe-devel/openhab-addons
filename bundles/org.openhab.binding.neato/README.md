@@ -1,10 +1,28 @@
+# Neato Binding Vendor Fork
+
+This is a fork of a Neato Binding which is a part of openHAB addons found here:
+https://github.com/openhab/openhab-addons
+This fork adds a new vendor option offering unofficial (and limited) support for Vorwerk vacuum cleaners.
+
+## Installation for Vorwerk
+
+You don't need to create a bridge and you need your vacuum's serial and secret. 
+
+```
+Thing neato:vacuumcleaner:ThingName "Vacuum" @ "Home" [ serial="MYSERIAL", secret="MYSECRET", vendor="vorwerk"]
+```
+
+If you don't have them, you may want to try my script here: 
+
+https://github.com/Pavion/vorwerk-robots
+
 # Neato Binding
 
-This binding is used to connect your openHAB system with Neato web (where you log in and find Your Neato's).
+This binding is used to connect your openHAB system with Neato/Vorwerk web (where your vacuums live).
 The binding supports discovery via configuring your login and password to a bridge.
 From the binding, you will get status of your vacuum cleaners and also a command channel where you can control them. Since the binding uses a polling mechanism, there may be some latency depending on your setting regarding refresh time.
 
-For log in transaction, the binding uses Neato Beehive API and for status and control, the binding uses Nucleao API.
+For log in transaction, the binding uses Beehive API and for status and control, the binding uses Nucleo API.
 
 ## Supported Things
 
@@ -38,6 +56,7 @@ Neato Account Config
 | -------- | ----------------------------------- |
 | email    | Email address tied to Neato Account |
 | password | Password tied to Neato Account      |
+| vendor   | Your vendor (Neato or Vorwerk)      |
 
 Vacuum Cleaner Config
 
@@ -46,6 +65,7 @@ Vacuum Cleaner Config
 | serial  | Serial Number of your Neato Robot                                                            |
 | secret  | Secret for accessing Neato web services (see note above)                                     |
 | refresh | Refresh time interval in seconds for updates from the Neato Web Service.  Defaults to 60 sec |
+| vendor  | Your vendor (Neato or Vorwerk)                                                              |
 
 ## Channels
 
