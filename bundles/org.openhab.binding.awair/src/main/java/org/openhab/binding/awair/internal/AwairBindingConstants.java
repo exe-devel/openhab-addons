@@ -38,13 +38,20 @@ public class AwairBindingConstants {
     // List of all Channel ids
     public static final String AWAIR_JSON = "json";
     public static final String HOSTNAME = "hostname";
+
+    public static final String TIMESTAMP = "timestamp";
+    public static final String SCORE = "score";
+    public static final String DEW_POINT = "dew_point";
     public static final String TEMPERATURE = "temperature";
     public static final String HUMIDITY = "humidity";
+    public static final String ABS_HUMIDITY = "abs_humid";
     public static final String CO2 = "co2";
-    public static final String TVOC = "tvoc";
+    public static final String CO2_EST = "co2_est";
+    public static final String CO2_EST_BASELINE = "co2_est_baseline";
+    public static final String VOC = "voc";
+    public static final String VOC_BASELINE = "voc_baseline";
+    public static final String VOC_H2_RAW = "voc_h2_raw";
+    public static final String VOC_ETHANOL_RAW = "voc_ethanol_raw";
     public static final String PM25 = "pm25";
-
-    public static final String DEW_POINT = "dew_point";
-    public static final String SCORE = "score";
-    public static final String TIMESTAMP = "timestamp";
+    public static final String PM10_EST = "pm10_est";
 }

@@ -22,6 +22,7 @@ import java.time.ZonedDateTime;
  *
  * @author Andreas Will - Initial contribution
  */
+
 public class AirQualityReading {
     private String timestamp;
     private Integer score;
@@ -64,7 +65,7 @@ public class AirQualityReading {
         return co2;
     }
 
-    public Integer getTvoc() {
+    public Integer getVoc() {
         if (voc < 0) {
             voc *= -1;
         }
@@ -73,5 +74,34 @@ public class AirQualityReading {
 
     public Integer getPM25() {
         return pm25;
+    }
+
+    // Experimental or estimates following
+    public Integer getPM10() {
+        return pm10_est;
+    }
+
+    public Integer getCo2_est_baseline() {
+        return co2_est_baseline;
+    }
+
+    public Double getAbsolute_humidity() {
+        return abs_humid;
+    }
+
+    public Integer getVoc_baseline() {
+        return voc_baseline;
+    }
+
+    public Integer getVoc_h2_raw() {
+        return voc_h2_raw;
+    }
+
+    public Integer getVoc_ethanol_raw() {
+        return voc_ethanol_raw;
+    }
+
+    public Integer getCo2_est() {
+        return co2_est;
     }
 }

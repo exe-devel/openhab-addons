@@ -40,7 +40,7 @@ import com.google.gson.Gson;
  * The {@link AwairHandler} is responsible for handling commands, which are
  * sent to one of the channels.
  *
- * @author Hans Heinz - Initial contribution
+ * @author Andreas Will - Initial contribution
  */
 @NonNullByDefault
 public class AwairHandler extends BaseThingHandler {
@@ -58,23 +58,6 @@ public class AwairHandler extends BaseThingHandler {
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         if (command instanceof RefreshType) {
-            // switch (channelUID.getId()) {
-            // case AWAIR_JSON:
-            //
-            // // TODO: handle command
-            //
-            // // Note: if communication with thing fails for some reason,
-            // // indicate that by setting the status with detail information:
-            // // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR,
-            // // "Could not control device at IP address x.x.x.x");
-            //
-            // State state;
-            // state = getAwairJSON();
-            // // state = new StringType("test");
-            //
-            // updateState(channelUID, state);
-            // break;
-            // }
             updateChannels();
         }
     }
@@ -90,34 +73,57 @@ public class AwairHandler extends BaseThingHandler {
                 ChannelUID channelUID = channel.getUID();
                 String channelID = channelUID.getId();
                 switch (channelID) {
+                    case TIMESTAMP:
+                        updateState(channelUID, new DateTimeType(aqr.getTimestamp()));
+                        break;
+                    case SCORE:
+                        updateState(channelUID, new DecimalType(aqr.getScore()));
+                        break;
+                    case DEW_POINT:
+                        updateState(channelUID, new QuantityType<>(aqr.getDewPoint(), SIUnits.CELSIUS));
+                        break;
                     case TEMPERATURE:
                         updateState(channelUID, new QuantityType<>(aqr.getTemperature(), SIUnits.CELSIUS));
                         break;
                     case HUMIDITY:
                         updateState(channelUID, new QuantityType<>(aqr.getHumidity(), Units.PERCENT));
                         break;
-                    case CO2:
-                        updateState(channelUID, new QuantityType<>(aqr.getCO2() * 1000000, Units.PARTS_PER_MILLION));
+                    case ABS_HUMIDITY:
+                        updateState(channelUID, new DecimalType(aqr.getAbsolute_humidity()));
                         break;
-                    case TVOC:
-                        updateState(channelUID, new QuantityType<>(aqr.getTvoc() * 1000000, Units.PARTS_PER_MILLION));
+                    case CO2:
+                        updateState(channelUID, new QuantityType<>(aqr.getCO2(), Units.PARTS_PER_MILLION));
+                        break;
+                    case CO2_EST:
+                        updateState(channelUID, new QuantityType<>(aqr.getCo2_est(), Units.PARTS_PER_MILLION));
+                        break;
+                    case CO2_EST_BASELINE:
+                        updateState(channelUID, new DecimalType(aqr.getCo2_est_baseline()));
+                        break;
+                    case VOC:
+                        updateState(channelUID, new QuantityType<>(aqr.getVoc(), Units.PARTS_PER_BILLION));
+                        break;
+                    case VOC_BASELINE:
+                        updateState(channelUID, new DecimalType(aqr.getVoc_baseline()));
+                        break;
+                    case VOC_H2_RAW:
+                        updateState(channelUID, new DecimalType(aqr.getVoc_h2_raw()));
+                        break;
+                    case VOC_ETHANOL_RAW:
+                        updateState(channelUID, new DecimalType(aqr.getVoc_ethanol_raw()));
                         break;
                     case PM25:
-                        updateState(channelUID, new QuantityType<>(aqr.getPM25() * 1000000, Units.PARTS_PER_MILLION));
+                        updateState(channelUID, new QuantityType<>(aqr.getPM25(), Units.MICROGRAM_PER_CUBICMETRE));
                         break;
-                    case DEW_POINT:
-                        updateState(channelUID, new DecimalType(aqr.getDewPoint()));
+                    case PM10_EST:
+                        updateState(channelUID, new QuantityType<>(aqr.getPM10(), Units.MICROGRAM_PER_CUBICMETRE));
                         break;
-                    case SCORE:
-                        updateState(channelUID, new DecimalType(aqr.getScore()));
-                        break;
-                    case TIMESTAMP:
-                        updateState(channelUID, new DateTimeType(aqr.getTimestamp()));
-                        break;
+
                 }
             }
         } else {
-            updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.OFFLINE.COMMUNICATION_ERROR, "Invalid values");
+            updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.OFFLINE.COMMUNICATION_ERROR,
+                    "Invalid values / AQR returned NULL");
         }
     }
 

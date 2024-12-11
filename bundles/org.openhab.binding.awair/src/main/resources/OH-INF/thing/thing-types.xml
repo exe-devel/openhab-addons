@@ -4,29 +4,33 @@
 	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
 
-	<!-- Sample Thing Type -->
+	<!-- Element Thing Type -->
 	<thing-type id="element">
-
 		<label>Awair Element</label>
 		<description>An Awair Element Air Quality Sensor</description>
-
 		<channels>
+			<channel id="timestamp" typeId="timestamp-value"/>
+			<channel id="score" typeId="score-value"/>
+			<channel id="dew_point" typeId="dew_point-value"/>
 			<channel id="temperature" typeId="system.indoor-temperature"/>
 			<channel id="humidity" typeId="system.atmospheric-humidity"/>
+			<channel id="abs_humid" typeId="abs_humid-value"/> <!-- Advanced -->
 			<channel id="co2" typeId="co2-value"/>
-			<channel id="tvoc" typeId="tvoc-value"/>
+			<channel id="co2_est" typeId="co2_est-value"/> <!-- Advanced -->
+			<channel id="co2_est_baseline" typeId="co2_est_baseline-value"/> <!-- Advanced -->
+			<channel id="voc" typeId="voc-value"/>
+			<channel id="voc_baseline" typeId="voc_baseline-value"/> <!-- Advanced -->
+			<channel id="voc_h2_raw" typeId="voc_h2_raw-value"/> <!-- Advanced -->
+						<channel id="voc_ethanol_raw" typeId="voc_ethanol_raw-value"/> <!-- Advanced -->
 			<channel id="pm25" typeId="pm25-value"/>
-			<channel id="dew_point" typeId="dew-point-value"/>
-			<channel id="score" typeId="score-value"/>
-			<channel id="timestamp" typeId="timestamp-value"/>
+			<channel id="pm10_est" typeId="pm10_est-value"/> <!-- Advanced -->
 		</channels>
-
 		<config-description>
 			<parameter name="hostname" type="text" required="true">
 				<context>network-address</context>
 				<label>Hostname</label>
 				<description>Hostname or IP address of the device</description>
-				<default>192.168.30.25</default>
+				<default>192.168.30.8</default>
 			</parameter>
 			<parameter name="refreshInterval" type="integer" unit="s" min="1">
 				<label>Refresh Interval</label>
@@ -45,39 +49,70 @@
 		<state readOnly="true"/>
 	</channel-type>
 
-	<channel-type id="co2-value">
-		<item-type>Number:Dimensionless</item-type>
-		<label>CO2</label>
-		<state readOnly="true"/>
-	</channel-type>
-
-	<channel-type id="pm25-value">
-		<item-type>Number:Dimensionless</item-type>
-		<label>PM25</label>
-		<state readOnly="true"/>
-	</channel-type>
-
-	<channel-type id="tvoc-value">
-		<item-type>Number:Dimensionless</item-type>
-		<label>TVOC</label>
-		<state readOnly="true"/>
-	</channel-type>
-
-	<channel-type id="dew-point-value">
-		<item-type>Number:Dimensionless</item-type>
-		<label>Dew Point</label>
-		<state readOnly="true"/>
-	</channel-type>
-
-	<channel-type id="score-value">
-		<item-type>Number:Dimensionless</item-type>
-		<label>AWAIR Score</label>
-		<state readOnly="true"/>
-	</channel-type>
-
 	<channel-type id="timestamp-value">
 		<item-type>DateTime</item-type>
 		<label>Last Update</label>
 		<state readOnly="true"/>
 	</channel-type>
+	<channel-type id="score-value">
+		<item-type unitHint="one">Number:Dimensionless</item-type>
+		<label>AWAIR Score</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="dew_point-value">
+		<item-type>Number:Temperature</item-type>
+		<label>Dew Point</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="abs_humid-value" advanced="true">
+		<item-type unitHint="g/m³">Number:Density</item-type>
+		<label>Absolute Humidity (Estimate)</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="co2-value">
+		<item-type unitHint="ppm">Number:Dimensionless</item-type>
+		<label>CO2</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="co2_est-value" advanced="true">
+		<item-type unitHint="ppm">Number:Dimensionless</item-type>
+		<label>CO2 (Estimate by TVOC sensor)</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="co2_est_baseline-value" advanced="true">
+		<item-type>Number</item-type>
+		<label>CO2 Baseline</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="voc-value">
+		<item-type unitHint="ppb">Number:Dimensionless</item-type>
+		<label>TVOC</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="voc_baseline-value" advanced="true">
+		<item-type>Number</item-type>
+		<label>TVOC Baseline</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="voc_h2_raw-value" advanced="true">
+		<item-type>Number</item-type>
+		<label>TVOC H2 Raw (Estimate)</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="voc_ethanol_raw-value" advanced="true">
+		<item-type>Number</item-type>
+		<label>TVOC Ethanol Raw (Estimate)</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="pm25-value">
+		<item-type unitHint="µg/m³">Number:Density</item-type>
+		<label>PM25</label>
+		<state readOnly="true"/>
+	</channel-type>
+	<channel-type id="pm10_est-value">
+		<item-type unitHint="µg/m³">Number:Density</item-type>
+		<label>PM 10 (Estimate)</label>
+		<state readOnly="true"/>
+	</channel-type>
+
 </thing:thing-descriptions>
